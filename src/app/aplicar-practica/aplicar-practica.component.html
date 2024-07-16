@@ -1,0 +1,98 @@
+<nav
+  class="navbar navbar-expand-lg bg-secondary text-uppercase navbar-light"
+  id="mainNav"
+>
+  <div class="container">
+    <a class="navbar-brand" routerLink="/index">Prácticas</a>
+    <button
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarResponsive"
+      class="navbar-toggler text-white bg-primary navbar-toggler-right text-uppercase rounded"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="
+            usuarioActual &&
+            usuarioActual.tipo === 'Estudiante' &&
+            usuarioActual.tutor
+          "
+        >
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/solicitar"
+            >Postular</a
+          >
+        </li>
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="usuarioActual && usuarioActual.tipo === 'Admin'"
+        >
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/asignar"
+            >Asignar tutores</a
+          >
+        </li>
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="
+            usuarioActual &&
+            usuarioActual.tipo === 'Estudiante' &&
+            usuarioActual.tutor
+          "
+        >
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/agregar"
+            >Reportar tarea</a
+          >
+        </li>
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="usuarioActual && usuarioActual.tipo === 'Profesor'"
+        >
+          <a
+            class="nav-link py-3 px-0 px-lg-3 rounded"
+            routerLink="/seguimiento"
+            >Seguimiento</a
+          >
+        </li>
+        <li class="nav-item mx-0 mx-lg-1" *ngIf="!usuarioActual">
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/login"
+            >Iniciar sesión</a
+          >
+        </li>
+        <li class="nav-item mx-0 mx-lg-1" *ngIf="usuarioActual">
+          <a
+            class="nav-link py-3 px-0 px-lg-3 rounded btn btn-danger"
+            (click)="cerrarSesion()"
+            >Cerrar sesión</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<section class="shadow contact-clean">
+  <form
+    [formGroup]="formularioSolicitud"
+    (ngSubmit)="onSubmit()"
+    class="bg-light border rounded border-secondary shadow-lg"
+    style="background: rgb(248, 248, 249)"
+  >
+    <h2 class="text-center">Postular para prácticas</h2>
+    <div class="form-group mb-3">
+      <input
+        class="form-control"
+        type="text"
+        name="name"
+        placeholder="Nombres"
+        formControlName="empresa"
+      />
+    </div>
+    <div class="form-group mb-3">
+      <button class="btn btn-primary" type="submit">Postular</button>
+    </div>
+  </form>
+</section>

@@ -1,0 +1,128 @@
+<nav
+  class="navbar navbar-expand-lg bg-secondary text-uppercase navbar-light"
+  id="mainNav"
+>
+  <div class="container">
+    <a class="navbar-brand" routerLink="/index">Prácticas</a>
+    <button
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarResponsive"
+      class="navbar-toggler text-white bg-primary navbar-toggler-right text-uppercase rounded"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="
+            usuarioActual &&
+            usuarioActual.tipo === 'Estudiante' &&
+            usuarioActual.tutor
+          "
+        >
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/solicitar"
+            >Postular</a
+          >
+        </li>
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="usuarioActual && usuarioActual.tipo === 'Admin'"
+        >
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/asignar"
+            >Asignar tutores</a
+          >
+        </li>
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="
+            usuarioActual &&
+            usuarioActual.tipo === 'Estudiante' &&
+            usuarioActual.tutor
+          "
+        >
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/agregar"
+            >Reportar tarea</a
+          >
+        </li>
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="usuarioActual && usuarioActual.tipo === 'Profesor'"
+        >
+          <a
+            class="nav-link py-3 px-0 px-lg-3 rounded"
+            routerLink="/seguimiento"
+            >Seguimiento</a
+          >
+        </li>
+        <li class="nav-item mx-0 mx-lg-1" *ngIf="!usuarioActual">
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/login"
+            >Iniciar sesión</a
+          >
+        </li>
+        <li class="nav-item mx-0 mx-lg-1" *ngIf="usuarioActual">
+          <a
+            class="nav-link py-3 px-0 px-lg-3 rounded btn btn-danger"
+            (click)="cerrarSesion()"
+            >Cerrar sesión</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="row justify-content-center mt-5 table-responsive">
+  <div class="col-xl-10 col-xxl-9">
+    <div class="card shadow">
+      <div
+        class="card-header d-flex flex-wrap justify-content-center align-items-center justify-content-sm-between gap-3"
+      >
+        <h5 class="display-6 text-nowrap text-capitalize mb-0">Estudiantes</h5>
+        <div class="input-group input-group-sm w-auto">
+          <a class="btn btn-info" role="button" routerLink="/crear"
+            >Establecer actividad</a
+          >
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead class="text-center">
+              <tr>
+                <th>Nombres</th>
+                <th>C.I</th>
+                <th>Celular</th>
+                <th>Correo institucional</th>
+                <th>Actividad</th>
+                <th class="text-center">Estado</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tarea of listaTareas">
+                <td class="text-truncate" style="max-width: 200px">
+                  {{ tarea.practica?.estudiante?.nombres }}
+                </td>
+                <td class="text-truncate" style="max-width: 200px">
+                  {{ tarea.practica?.estudiante?.ci }}
+                </td>
+                <td class="text-truncate" style="max-width: 200px">
+                  {{ tarea.practica?.estudiante?.correo }}
+                </td>
+                <td class="text-truncate" style="max-width: 200px">
+                  {{ tarea.titulo }}
+                </td>
+                <td class="text-center">
+                  <i class="far fa-check-circle btn btn-primary"></i>
+                  <i class="far fa-times-circle btn btn-danger"></i>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

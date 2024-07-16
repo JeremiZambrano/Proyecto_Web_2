@@ -1,0 +1,96 @@
+<nav
+  class="navbar navbar-expand-lg bg-secondary text-uppercase navbar-light"
+  id="mainNav"
+>
+  <div class="container">
+    <a class="navbar-brand" routerLink="/index">Prácticas</a>
+    <button
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarResponsive"
+      class="navbar-toggler text-white bg-primary navbar-toggler-right text-uppercase rounded"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="
+            usuarioActual &&
+            usuarioActual.tipo === 'Estudiante' &&
+            usuarioActual.tutor
+          "
+        >
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/solicitar"
+            >Postular</a
+          >
+        </li>
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="usuarioActual && usuarioActual.tipo === 'Admin'"
+        >
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/asignar"
+            >Asignar tutores</a
+          >
+        </li>
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="
+            usuarioActual &&
+            usuarioActual.tipo === 'Estudiante' &&
+            usuarioActual.tutor
+          "
+        >
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/agregar"
+            >Reportar tarea</a
+          >
+        </li>
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="usuarioActual && usuarioActual.tipo === 'Profesor'"
+        >
+          <a
+            class="nav-link py-3 px-0 px-lg-3 rounded"
+            routerLink="/seguimiento"
+            >Seguimiento</a
+          >
+        </li>
+        <li class="nav-item mx-0 mx-lg-1" *ngIf="!usuarioActual">
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/login"
+            >Iniciar sesión</a
+          >
+        </li>
+        <li class="nav-item mx-0 mx-lg-1" *ngIf="usuarioActual">
+          <a
+            class="nav-link py-3 px-0 px-lg-3 rounded btn btn-danger"
+            (click)="cerrarSesion()"
+            >Cerrar sesión</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<section class="text-white bg-primary mb-0" id="about">
+  <div class="container">
+    <h2 class="text-uppercase text-center text-white">Acerca de</h2>
+    <hr class="star-light mb-5" />
+    <div class="row">
+      <div class="col-lg-4 col-xl-12 ms-auto">
+        <p class="lead">
+          Bienvenidos a nuestra plataforma de gestión de prácticas
+          pre-profesionales, una herramienta diseñada para facilitar y mejorar
+          la experiencia de los estudiantes universitarios en su proceso de
+          formación profesional. Nuestra misión es brindar una solución
+          eficiente y accesible que permita a los estudiantes administrar sus
+          prácticas de manera sencilla y a los profesores supervisar y verificar
+          el progreso de sus alumnos con mayor facilidad.
+        </p>
+      </div>
+    </div>
+    <div class="text-center mt-4"></div>
+  </div>
+</section>

@@ -1,0 +1,125 @@
+<nav
+  class="navbar navbar-expand-lg bg-secondary text-uppercase navbar-light"
+  id="mainNav"
+>
+  <div class="container">
+    <a class="navbar-brand" routerLink="/index">Prácticas</a>
+    <button
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarResponsive"
+      class="navbar-toggler text-white bg-primary navbar-toggler-right text-uppercase rounded"
+      aria-controls="navbarResponsive"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fa fa-bars"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav ms-auto">
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="
+            usuarioActual &&
+            usuarioActual.tipo === 'Estudiante' &&
+            usuarioActual.tutor
+          "
+        >
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/solicitar"
+            >Postular</a
+          >
+        </li>
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="usuarioActual && usuarioActual.tipo === 'Admin'"
+        >
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/asignar"
+            >Asignar tutores</a
+          >
+        </li>
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="
+            usuarioActual &&
+            usuarioActual.tipo === 'Estudiante' &&
+            usuarioActual.tutor
+          "
+        >
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/agregar"
+            >Reportar tarea</a
+          >
+        </li>
+        <li
+          class="nav-item mx-0 mx-lg-1"
+          *ngIf="usuarioActual && usuarioActual.tipo === 'Profesor'"
+        >
+          <a
+            class="nav-link py-3 px-0 px-lg-3 rounded"
+            routerLink="/seguimiento"
+            >Seguimiento</a
+          >
+        </li>
+        <li class="nav-item mx-0 mx-lg-1" *ngIf="!usuarioActual">
+          <a class="nav-link py-3 px-0 px-lg-3 rounded" routerLink="/login"
+            >Iniciar sesión</a
+          >
+        </li>
+        <li class="nav-item mx-0 mx-lg-1" *ngIf="usuarioActual">
+          <a
+            class="nav-link py-3 px-0 px-lg-3 rounded btn btn-danger"
+            (click)="cerrarSesion()"
+            >Cerrar sesión</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<section class="shadow contact-clean">
+  <form
+    [formGroup]="formularioTarea"
+    (ngSubmit)="onSubmit()"
+    class="bg-light border rounded border-secondary shadow-lg"
+    style="background: rgb(248, 248, 249)"
+  >
+    <h2 class="text-center">Crear actividad</h2>
+    <div class="form-group mb-3">
+      <input
+        class="form-control"
+        type="text"
+        name="actividad"
+        placeholder="Actividad"
+        formControlName="titulo"
+      />
+      <div
+        *ngIf="
+          formularioTarea.get('titulo')?.invalid &&
+          formularioTarea.get('titulo')?.touched
+        "
+        class="text-danger"
+      >
+        Título es obligatorio y debe tener entre 10 y 20 caracteres.
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <input
+        class="form-control"
+        type="text"
+        name="detalles"
+        placeholder="Detalles"
+        formControlName="detalles"
+      />
+      <div
+        *ngIf="
+          formularioTarea.get('detalles')?.invalid &&
+          formularioTarea.get('detalles')?.touched
+        "
+        class="text-danger"
+      >
+        Detalles son obligatorios y deben tener entre 20 y 50 caracteres.
+      </div>
+    </div>
+    <div class="form-group mb-3">
+      <button class="btn btn-primary" type="submit">Agregar</button>
+    </div>
+  </form>
+</section>
